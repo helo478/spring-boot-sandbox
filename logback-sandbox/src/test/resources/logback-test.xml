@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/base.xml" />
+
+	<logger name="com.helo478.springboot.logback" level="DEBUG" />
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{HH:mm:ss} [%-20thread] %-5p %logger{64} - %msg%n
+			</Pattern>
+		</encoder>
+	</appender>
+
+	<root level="WARN" />
+
+	<logger name="com.helo478.springboot.logback" additivity="false">
+		<appender-ref ref="CONSOLE" />
+	</logger>
+
+</configuration>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/base.xml" />
+
+	<!-- environment specific logging levels -->
+	<springProfile name="dev">
+		<logger name="com.helo478.springboot.logback" level="TRACE" />
+	</springProfile>
+	<springProfile name="stage">
+		<logger name="com.helo478.springboot.logback" level="DEBUG" />
+	</springProfile>
+	<springProfile name="prod">
+		<logger name="com.helo478.springboot.logback" level="INFO" />
+	</springProfile>
+
+	<!-- configurable log file location -->
+	<springProperty scope="context" name="logsDir" source="logging.dir" defaultValue="/logs/logback-sandbox" />
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%-20thread] %-5p %logger{64} - %msg%n
+			</Pattern>
+		</encoder>
+	</appender>
+
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${logsDir}/debug.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%-20thread] %-5p %logger{64} - %msg%n
+			</Pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>${logsDir}/archived/debug.%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>10MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+
+	</appender>
+
+	<root level="WARN" />
+
+	<logger name="com.helo478.springboot.logback" additivity="false">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+
+</configuration>
