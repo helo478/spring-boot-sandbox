@@ -1,0 +1,18 @@
+<<<<<<< HEAD
+.project
+.settings
+.classpath
+.metadata
+.settings/.jsdtscope
+=======
+/target/
+target
+.settings/*
+!.settings/.jsdtscope
+.project
+.classpath
+>>>>>>> fecb7cf35fe9f9ed8e0faefbd4dfbd6bb4fbca7f
+.settings/.jsdtscope
+taxtab-project/taxtab-services/pom.xml
+/.tern-project
+/.idea
